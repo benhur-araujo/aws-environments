@@ -9,7 +9,7 @@ terraform {
   }
   backend "s3" {
     bucket = "platform-master"
-    key    = "tf-states/aws-environments/terraform.tfstate"
+    key    = "tf-states/aws-environments/ephemeral-resources/terraform.tfstate"
     region = "eu-north-1"
   }
 }
