@@ -3,13 +3,13 @@
 # Policy to Allow EKS Service assume IAM Roles (any role). EKS will be granted a temp token, a token with the permissions to assume IAM Roles:
 data "aws_iam_policy_document" "eks-assume-role" {
   statement {
-    effect = "Allow"   # Allow the service to assume the Role
+    effect = "Allow" # Allow the service to assume the Role
 
-    principals {  # Identifying the service that can assume the Role
-      type        = "Service"   
+    principals { # Identifying the service that can assume the Role
+      type        = "Service"
       identifiers = ["eks.amazonaws.com"]
     }
-    actions = ["sts:AssumeRole"]   # Here is the allowed Action
+    actions = ["sts:AssumeRole"] # Here is the allowed Action
   }
 }
 
@@ -33,7 +33,7 @@ resource "aws_eks_cluster" "eks-cluster" {
   name = "${var.project}-eks-${terraform.workspace}"
   # EKS will use this role when interacting with other AWS Services
   role_arn = aws_iam_role.master-eks-role.arn
-  version = "1.27"
+  version  = "1.27"
 
   kubernetes_network_config {
     # CIDR block to assign to Kubernetes pod and service IP address

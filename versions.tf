@@ -3,8 +3,8 @@ terraform {
 
   required_providers {
     aws = {
-        source = "hashicorp/aws"
-        version = "~>5.19.0"
+      source  = "hashicorp/aws"
+      version = "~>5.19.0"
     }
   }
   backend "s3" {
@@ -18,8 +18,8 @@ provider "aws" {
   region = "eu-north-1"
   default_tags {
     tags = {
-      project = var.project
-      owner= "Benhur A. Silva"
+      project        = var.project
+      owner          = "Benhur A. Silva"
       owner-linkedin = "linkedin.com/in/benhuraraujo/"
     }
   }

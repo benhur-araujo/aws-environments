@@ -46,7 +46,7 @@ resource "aws_iam_role_policy_attachment" "AmazonEC2ContainerRegistryReadOnly-at
 
 # Create two EKS Node Groups
 resource "aws_eks_node_group" "master-eks-workers" {
-  count = 2
+  count           = 2
   cluster_name    = aws_eks_cluster.eks-cluster.name
   node_group_name = "${var.project}-eks-node-group-${count.index}-${terraform.workspace}"
   node_role_arn   = aws_iam_role.master-eks-workers-role.arn
@@ -63,8 +63,8 @@ resource "aws_eks_node_group" "master-eks-workers" {
     max_unavailable = 1
   }
 
-# Allow external changes without Terraform plan difference
-    lifecycle {
+  # Allow external changes without Terraform plan difference
+  lifecycle {
     ignore_changes = [scaling_config[0].desired_size]
   }
 
