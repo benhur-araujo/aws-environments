@@ -1,0 +1,41 @@
+name: create ephemeral resources
+on:
+  workflow_dispatch: # Trigger this workflow manually
+    inputs:
+      environment:
+        description: This will be used as TF's workspace
+        required: true
+        type: choice
+        options:
+            - dev
+            - staging
+            - prod
+        default: 'dev'
+      working-dir:
+        description: tf manifests directory for ephemeral resources
+        type: string
+        required: true
+        default: ./ephemeral-resources/
+      action:
+        description: Choose between plan or create the environment
+        required: true
+        type: choice
+        options:
+          - plan
+          - create
+        default: create
+
+  schedule: # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule
+    - cron: "45 9 * * 1,2,3,4,5"        # Run 9:45 CT, any day of the month, every month, from Mon to Fri
+
+jobs:
+  create-ephemeral-resources:
+    uses: benhur-sre/gh-reusable-workflows/.github/workflows/aws-iac.yaml@main
+    with:
+      working-dir: ${{ inputs.working-dir }}
+      plan: ${{ inputs.action == 'plan' }}
+      create: ${{ inputs.action == 'create' }}
+      environment: ${{ inputs.environment }}
+
+
+
