@@ -8,7 +8,7 @@ terraform {
     }
   }
   backend "s3" {
-    bucket = "platform-master"
+    bucket = "platform-master-project"
     key    = "tf-states/aws-environments/terraform.tfstate"
     region = "eu-north-1"
   }
@@ -20,7 +20,6 @@ provider "aws" {
     tags = {
       project        = var.project
       owner          = "Benhur A. Silva"
-      owner-linkedin = "linkedin.com/in/benhuraraujo/"
     }
   }
 }
